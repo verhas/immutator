@@ -33,7 +33,7 @@ public class ChainedImmutable {
 
 	private static final ProxyFactory<?> fluentFactory = new ProxyFactory<>();
 	static {
-		chainFactory.setCallbackFilter(SelectVoidAndSubClassCallbackFilter
+		fluentFactory.setCallbackFilter(SelectVoidAndSubClassCallbackFilter
 				.getInstance());
 	}
 
