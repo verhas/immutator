@@ -4,10 +4,10 @@ import java.lang.reflect.Method;
 
 import com.javax0.djcproxy.CallbackFilter;
 
-public class SelectVoidAndSubClassCallbackFilter implements CallbackFilter {
-	private static final SelectVoidAndSubClassCallbackFilter INSTANCE = new SelectVoidAndSubClassCallbackFilter();
+public class FluentMethodFilter implements CallbackFilter {
+	private static final FluentMethodFilter INSTANCE = new FluentMethodFilter();
 
-	public static SelectVoidAndSubClassCallbackFilter getInstance() {
+	public static FluentMethodFilter getInstance() {
 		return INSTANCE;
 	}
 

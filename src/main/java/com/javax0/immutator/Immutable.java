@@ -4,11 +4,11 @@ import com.javax0.djcproxy.ProxyFactory;
 import com.javax0.djcproxy.interceptors.RuntimeExceptionInterceptor;
 
 public class Immutable {
-	public static final ChainedImmutable of = new ChainedImmutable();
+	public static final FluentImmutable of = new FluentImmutable();
 
 	private static final ProxyFactory<?> globalFactory = new ProxyFactory<>();
 	static {
-		globalFactory.setCallbackFilter(SelectVoidCallbackFilter.getInstance());
+		globalFactory.setCallbackFilter(VoidMethodFilter.getInstance());
 	}
 
 	/**
