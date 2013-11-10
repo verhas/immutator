@@ -140,4 +140,16 @@ public class ImmutableTest {
 				testObject);
 		immutable.mutator();
 	}
+
+	@Test
+	public void given_TwoObjectOfTheSameClass_when_CreatingImmutableVersionBasedOnTheSameInterface_then_CreatingImmutableVersionCreatesOneClassOnly()
+			throws Exception {
+		MutableClass testObject1 = new MutableClass();
+		MutableClass immutable1 = Immutable.of.using(ImmutableMethods.class)
+				.of(testObject1);
+		MutableClass testObject2 = new MutableClass();
+		MutableClass immutable2 = Immutable.of.using(ImmutableMethods.class)
+				.of(testObject2);
+		Assert.assertEquals(immutable1.getClass(), immutable2.getClass());
+	}
 }
