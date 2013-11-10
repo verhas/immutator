@@ -90,4 +90,54 @@ public class ImmutableTest {
 		Fluent c = b.setI(20);
 		Assert.assertTrue(c == a);
 	}
+
+	@Test
+	public void given_TwoSimpleObjectsOfTheSameType_when_CreatingImmutableVersions_then_NoDuplicatedProxyClassIsCreated()
+			throws Exception {
+		A a1 = new A();
+		A a2 = new A();
+		A aa = Immutable.of(a1);
+		A ab = Immutable.of(a2);
+		Assert.assertEquals(aa.getClass(), ab.getClass());
+	}
+
+	@Test
+	public void given_TwoFluentObjectsOfTheSameType_when_CreatingImmutableVersions_then_NoDuplicatedProxyClassIsCreated()
+			throws Exception {
+		Fluent a1 = new Fluent();
+		Fluent a2 = new Fluent();
+		Fluent aa = Immutable.of(a1);
+		Fluent ab = Immutable.of(a2);
+		Assert.assertEquals(aa.getClass(), ab.getClass());
+	}
+
+	public static class MutableClass {
+		public void mutator() {
+		}
+
+		public void immutator() {
+		}
+	}
+
+	interface ImmutableMethods {
+		void immutator();
+	};
+
+	@Test(expected = RuntimeException.class)
+	public void given_AClassAndImmutableMethodsInterface_when_CreatingImmutableVersion_then_CallingQueryRunsFine()
+			throws Exception {
+		MutableClass testObject = new MutableClass();
+		MutableClass immutable = Immutable.of.using(ImmutableMethods.class).of(
+				testObject);
+		immutable.immutator();
+	}
+
+	@Test
+	public void given_AClassAndImmutableMethodsInterface_when_CreatingImmutableVersion_then_CallingMutatorThrowsException()
+			throws Exception {
+		MutableClass testObject = new MutableClass();
+		MutableClass immutable = Immutable.of.using(ImmutableMethods.class).of(
+				testObject);
+		immutable.mutator();
+	}
 }

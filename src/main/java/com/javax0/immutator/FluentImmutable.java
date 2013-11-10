@@ -23,7 +23,7 @@ public class FluentImmutable {
 	 * @return
 	 * @throws Exception
 	 */
-	public <T> T fluent(T original) throws Exception {
+	public <T> T of(T original) throws Exception {
 		@SuppressWarnings("unchecked")
 		ProxyFactory<T> factory = (ProxyFactory<T>) fluentFactory;
 		T proxy = factory.create(original,

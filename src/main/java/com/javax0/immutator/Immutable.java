@@ -4,7 +4,7 @@ import com.javax0.djcproxy.ProxyFactory;
 import com.javax0.djcproxy.interceptors.RuntimeExceptionInterceptor;
 
 public class Immutable {
-	public static final FluentImmutable of = new FluentImmutable();
+	public static final ImmutableExtender of = new ImmutableExtender();
 
 	private static final ProxyFactory<?> globalFactory = new ProxyFactory<>();
 	static {
