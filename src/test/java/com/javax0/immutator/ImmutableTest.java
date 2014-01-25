@@ -152,4 +152,21 @@ public class ImmutableTest {
 				.of(testObject2);
 		Assert.assertEquals(immutable1.getClass(), immutable2.getClass());
 	}
+
+	public static class CloneableA extends A implements Cloneable {
+
+		@Override
+		public CloneableA clone() throws CloneNotSupportedException {
+			return (CloneableA) super.clone();
+		}
+	}
+
+	@Test
+	public void given_AnObject_when_CreatingImmutableVersion_then_CloneableWorks()
+			throws Exception {
+		A a = new CloneableA();
+		a.setI(10);
+		A b = Immutable.of(a);
+		Assert.assertEquals(10, b.getI());
+	}
 }
